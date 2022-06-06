@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- 具体配置信息在 http://www.mybatis.org/generator/configreference/xmlconfig.html -->
+<generatorConfiguration>
+    <context id="testTables" targetRuntime="MyBatis3">
+
+        <!-- 自动识别数据库关键字，默认false -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错 -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 自动生成toString方法和equal、hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+
+        <commentGenerator>
+            <!-- 是否生成数据库注释 true：是 ： false:否-->
+            <property name="addRemarkComments" value="true"/>
+            <!-- 是否去除自动生成的注释包含时间戳 true：是 ： false:否-->
+            <property name="suppressDate" value="false"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/bookmng?userSSL=false"
+                        userId="root"
+                        password="2021_Accenture">
+            <!--MySQL 8.0 以上版本需要避免生成 XXXWithBlobs -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+            <property name="forceBigDecimals" value="false"/>
+            <!--当useJSR310Types为true时，就会jdbc对应的日期类型会转成java8中的LocateDateTime类型，如果useJSR310Types为false，则还是转成java.util.Date类型-->
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成POJO类的位置 -->
+        <javaModelGenerator targetPackage="com.ac.entity" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- targetProject:生成mapper映射文件的位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- targetPackage：生成mapper接口的位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ac.mapper" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 表名tableName 实体类名domainObjectName  避免生成XXXExample enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"-->
+<!--        <table tableName="user" domainObjectName="User" >
+            &lt;!&ndash; 表字段可以指定java类型 &ndash;&gt;
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+<!--        <table tableName="login_log" domainObjectName="LoginLog" >-->
+<!--            &lt;!&ndash; 表字段可以指定java类型 &ndash;&gt;-->
+<!--            <generatedKey column="log_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="book" domainObjectName="Book" >-->
+<!--            &lt;!&ndash; 表字段可以指定java类型 &ndash;&gt;-->
+<!--            <generatedKey column="book_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="borrow_history" domainObjectName="BorrowHistory" >
+            <!-- 表字段可以指定java类型 -->
+            <generatedKey column="history_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

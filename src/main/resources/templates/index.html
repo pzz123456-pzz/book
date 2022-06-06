@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div><a class="exportdata">导出</a></div>
+<div style="display: none;"  id="exportdat"></div>
+</body>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".exportdata").click(function() {
+        var fileName = '547d0046-351c-4cd5-8e06-7d74752d7a36';
+        var h = '<a id="exportda" href="/downloadServlet?fileName=' + encodeURI(encodeURI(fileName)) + '">' + fileName + '</a>'
+        $("#exportdat").html(h);
+        $("#exportda")[0].click();
+    })
+</script>
+</html>
